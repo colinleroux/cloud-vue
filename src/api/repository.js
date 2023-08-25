@@ -1,6 +1,6 @@
 import api from "./api";
 
-const backendUrl = "https://phplaravel-1087149-3803713.cloudwaysapps.com";
+const backendUrl = "https://apivue.com";
 
 export default {
   createSession() {

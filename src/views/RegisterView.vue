@@ -111,6 +111,8 @@ export default {
       try {
         const response = await repository.register(this.user);
         repository.setToken(response.data.token);
+        // Send a separate request to trigger the verification email
+        await repository.sendVerificationEmail();
         this.reloadPage();
         this.$router.push("/products");
       } catch (error) {

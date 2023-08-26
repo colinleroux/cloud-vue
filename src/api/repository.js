@@ -52,7 +52,10 @@ export default {
     }
     return false;
   },
-  sendVerificationEmail() {
-    return api.post(`${backendUrl}/auth/send-verification-email`);
+  sendVerificationEmail(userId, hash) {
+    return api.post(`${backendUrl}/auth/send-verification-email`, {
+      id: userId,
+      hash: hash,
+    });
   },
 };

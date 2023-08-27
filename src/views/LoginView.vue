@@ -82,7 +82,7 @@ export default {
         console.log(response);
         repository.setToken(response.data.token);
         this.reloadPage();
-        this.$router.push("/products");
+        //this.$router.push("/products");
         this.errorMessage = null;
       } catch (error) {
         console.error(error);

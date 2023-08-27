@@ -1,6 +1,6 @@
 import api from "./api";
 
-const backendUrl = "https://apivue.com";
+const backendUrl = "https://phplaravel-1087149-3834893.cloudwaysapps.com";
 
 export default {
   createSession() {
@@ -10,7 +10,7 @@ export default {
   login(params) {
     const email = params.email;
     const password = params.password;
-    return api.post(`${backendUrl}/api/auth/login`, {
+    return api.post(`${backendUrl}/api/login`, {
       email,
       password,
     });
@@ -21,7 +21,7 @@ export default {
     const email = params.email;
     const password = params.password;
     const password_confirmation = params.password_confirmation;
-    return api.post(`${backendUrl}/api/auth/register`, {
+    return api.post(`${backendUrl}/api/register`, {
       name,
       email,
       password,

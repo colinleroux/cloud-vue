@@ -1,11 +1,12 @@
 <template>
   <div class="grid grid-cols-4 gap-4">
-    <div v-for="product in data.data" :key="product.id">
-      <router-link :to="'/products/' + product.id">
+    <div v-for="recipe in data" :key="recipe.id">
+      <router-link :to="'/recipes/' + recipe.id">
         <div class="bg-white p-4 shadow rounded-lg">
-          <h1 class="text-lg font-medium">{{ product.name }}</h1>
-          <p class="text-gray-500">{{ product.description }}</p>
-          <p class="text-gray-900 font-bold">${{ product.price }}</p>
+          <h1 class="text-lg font-medium">{{ recipe.title }}</h1>
+          <div v-if="recipe.recipe_pictures.length > 0">
+            <img :src="recipe.recipe_pictures[0].filename" alt="Recipe Image" />
+          </div>
         </div>
       </router-link>
     </div>
@@ -28,7 +29,7 @@
 import repository from "@/api/repository";
 
 export default {
-  name: "ProductsView",
+  name: "RecipesView",
   components: {},
 
   data() {
@@ -38,9 +39,9 @@ export default {
   },
 
   mounted() {
-    repository.getProducts().then((response) => {
+    repository.getRecipes().then((response) => {
       console.log(response.data);
-      this.data = response.data;
+      this.data = response.data.data; // Access the 'data' array from the response
     });
   },
 };

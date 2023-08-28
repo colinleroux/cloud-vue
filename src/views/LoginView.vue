@@ -63,10 +63,10 @@ export default {
   data() {
     return {
       user: {
-        email: null,
-        password: null,
+        email: "",
+        password: "",
       },
-      errorMessage: null,
+      errorMessage: "",
     };
   },
   mounted() {
@@ -82,7 +82,7 @@ export default {
         console.log(response);
         repository.setToken(response.data.token);
         this.reloadPage();
-        //this.$router.push("/products");
+        this.$router.push("/recipes");
         this.errorMessage = null;
       } catch (error) {
         console.error(error);

@@ -111,7 +111,7 @@ export default {
       try {
         const response = await repository.register(this.user);
         if (response.data.success) {
-          this.$router.push("/login"); // Redirect to login page
+          this.$router.push("/"); // Redirect to login page
         } else {
           // Handle the case where the response doesn't contain a token
           console.error("Data missing in response after registration.");

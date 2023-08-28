@@ -112,7 +112,7 @@ export default {
         const response = await repository.register(this.user);
         repository.setToken(response.data.token);
         this.reloadPage();
-        this.$router.push("/products");
+        this.$router.push("/login");
       } catch (error) {
         console.error(error);
         if (

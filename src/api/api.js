@@ -9,7 +9,7 @@ instance.interceptors.request.use((request) => {
   request.headers.common["Content-Type"] = "application/json";
 
   const token = localStorage.getItem("token");
-
+  console.log("Token from Local Storage:", token); // Add this line
   if (token) {
     request.headers.common["Authorization"] = `Bearer ${token}`;
   }

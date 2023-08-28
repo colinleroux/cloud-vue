@@ -32,11 +32,11 @@ export default {
   logout() {
     return api.post(`${backendUrl}/api/auth/logout`);
   },
-  getProducts() {
-    return api.get(`${backendUrl}/api/v1/products`);
+  getRecipes() {
+    return api.get(`${backendUrl}/api/v1/recipes`);
   },
-  getProduct(id) {
-    return api.get(`${backendUrl}/api/v1/products/` + id);
+  getRecipe(id) {
+    return api.get(`${backendUrl}/api/v1/recipes/` + id);
   },
   setToken(token) {
     localStorage.setItem("token", token);

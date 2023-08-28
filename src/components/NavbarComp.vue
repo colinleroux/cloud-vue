@@ -16,8 +16,8 @@
       class="font-bold text-white flex justify-between items-center flex-wrap bg-blue-500 p-6"
     >
       <div class="flex space-x-5 items-center">
-        <router-link class="hover:bg-green-500 rounded px-2 py-1" to="/products"
-          >Products</router-link
+        <router-link class="hover:bg-green-500 rounded px-2 py-1" to="/recipes"
+          >Recipes</router-link
         >
       </div>
       <button

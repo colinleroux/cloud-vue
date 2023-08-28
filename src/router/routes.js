@@ -1,7 +1,7 @@
 import LoginView from "@/views/LoginView.vue";
 import RegisterView from "@/views/RegisterView.vue";
-import ProductsView from "@/views/ProductsView.vue";
-import ProductView from "@/views/ProductView.vue";
+import RecipesView from "@/views/RecipesView.vue";
+import RecipeView from "@/views/RecipeView.vue";
 import middleware from "./middleware";
 
 export default [
@@ -28,15 +28,15 @@ export default [
     beforeEnter: middleware.user,
   },
   {
-    path: "/products",
-    name: "products",
-    component: ProductsView,
+    path: "/recipes",
+    name: "recipes",
+    component: RecipesView,
     beforeEnter: middleware.user,
   },
   {
-    path: "/products/:id",
-    name: "product",
-    component: ProductView,
+    path: "/recipes/:id",
+    name: "recipe",
+    component: RecipeView,
     beforeEnter: middleware.user,
   },
 ];

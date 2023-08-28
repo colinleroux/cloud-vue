@@ -115,6 +115,11 @@ export default {
           window.alert(
             "Registration successful! Please check your email for verification instructions."
           );
+          // Clear the form
+          this.user.name = null;
+          this.user.email = null;
+          this.user.password = null;
+          this.user.password_confirmation = null;
           // this.$router.push("/"); // Redirect to login page
         } else {
           // Handle the case where the response doesn't contain a token

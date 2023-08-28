@@ -20,12 +20,12 @@ export default {
     const name = params.name;
     const email = params.email;
     const password = params.password;
-    const password_confirmation = params.password_confirmation;
+    const confirm_password = params.password_confirmation;
     return api.post(`${backendUrl}/api/register`, {
       name,
       email,
       password,
-      password_confirmation,
+      confirm_password,
     });
   },
 

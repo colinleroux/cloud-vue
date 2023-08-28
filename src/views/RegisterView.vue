@@ -111,7 +111,11 @@ export default {
       try {
         const response = await repository.register(this.user);
         if (response.data.success) {
-          this.$router.push("/"); // Redirect to login page
+          // Show a success alert
+          window.alert(
+            "Registration successful! Please check your email for verification instructions."
+          );
+          // this.$router.push("/"); // Redirect to login page
         } else {
           // Handle the case where the response doesn't contain a token
           console.error("Data missing in response after registration.");

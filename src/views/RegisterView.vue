@@ -110,9 +110,12 @@ export default {
       repository.createSession();
       try {
         const response = await repository.register(this.user);
-        repository.setToken(response.data.token);
-        this.reloadPage();
-        this.$router.push("/login");
+        if (response.data.token) {
+          this.$router.push("/login"); // Redirect to login page
+        } else {
+          // Handle the case where the response doesn't contain a token
+          console.error("Token missing in response after registration.");
+        }
       } catch (error) {
         console.error(error);
         if (

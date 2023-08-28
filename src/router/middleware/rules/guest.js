@@ -1,6 +1,6 @@
 export default (to, from, next) => {
   if (localStorage.getItem("token")) {
-    next({ name: "login" });
+    next({ name: "products" });
   } else {
     next();
   }

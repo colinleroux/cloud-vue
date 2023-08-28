@@ -86,8 +86,13 @@ export default {
         this.errorMessage = null;
       } catch (error) {
         console.error(error);
-        this.errorMessage =
-          "Login failed. Please check your email and password.";
+        if (error.response && error.response.status === 401) {
+          this.errorMessage =
+            "Email not verified. Please check your email for verification instructions.";
+        } else {
+          this.errorMessage =
+            "Login failed. Please check your email and password.";
+        }
       }
     },
     reloadPage() {

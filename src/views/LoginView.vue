@@ -13,62 +13,39 @@
   </div>
 </template>
 <script>
-import api from "../api/api.js";
+import repository from "@/api/repository"; // Import the repository
 export default {
   data() {
     return {
-      user: "test@test.com",
-      pass: "asdf",
+      user: "monique11@test.com",
+      pass: "12341234",
       message: "",
     };
   },
   mounted: function () {},
   methods: {
-    login: function () {
-      // get token
-      api()
-        .post("login", {
-          email: this.user,
-          password: this.pass,
-          device_name: "browser",
-        })
-        .then((response) => {
-          const token = response.data.token;
-          console.log("Token from Response:", token);
-          // eslint-disable-next-line no-undef
-          repository.setToken(token); // Store token using the updated method
-          console.log(
-            "Token Stored in Local Storage:",
-            // eslint-disable-next-line no-undef
-            repository.getStoredToken()
-          );
-        });
+    async login() {
+      try {
+        const token = await repository.login(this.user);
+        console.log("Token from Response:", token);
+        repository.setToken(token);
+        console.log(
+          "Token Stored in Local Storage:",
+          repository.getStoredToken()
+        );
+        this.reloadPage();
+        this.errorMessage = null;
+      } catch (error) {
+        console.error(error);
+        if (error.response && error.response.status === 401) {
+          this.errorMessage = "Email not verified.";
+        } else {
+          this.errorMessage = "Login failed.";
+        }
+      }
     },
-    logout: function () {
-      // revoke token
-      api()
-        .post("logout")
-        .then((response) => {
-          localStorage.removeItem("token");
-          console.log(response.data);
-        });
-    },
-    whoami: function () {
-      // test if backend auth is working
-      api()
-        .get("whoami")
-        .then((response) => console.log((this.message = response.data)))
-        .catch((error) => {
-          if (error.response) this.message = error.response.data.message;
-          throw error;
-        });
-    },
-    test: function () {
-      // this is an unauthenticated route, should always work
-      this.message = "";
-      api()
-        .get("test")
-        .then((response) => console.log((this.message = response.data)));
+    reloadPage() {
+      window.location.reload();
     },
   },
 };

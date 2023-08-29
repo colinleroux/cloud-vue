@@ -77,7 +77,7 @@
             const token = response.data.data.token;
             localStorage.setItem("token", token);
             this.errorMessage = "";
-            this.reloadPage();
+            //this.reloadPage();
             this.$router.push("/recipes");
             // Redirect or perform other actions after successful login
           })

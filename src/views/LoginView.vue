@@ -71,18 +71,18 @@ export default {
   methods: {
     async login() {
       try {
-        const response = await api().post("login", {
+        const r = await api().post("login", {
           email: this.user.email,
           password: this.user.password,
           device_name: "browser",
         });
-        console.log(response.data);
-        localStorage.setItem("token", response.data.token); // Store token in local storage
+        console.log(r.data);
+        localStorage.setItem("token", r.data.token); // Store token in local storage
         this.reloadPage();
         this.errorMessage = null;
       } catch (error) {
         console.error(error);
-        if (error.response && error.response.status === 401) {
+        if (error.r && error.r.status === 401) {
           this.errorMessage = "Email not verified.";
         } else {
           this.errorMessage = "Login failed.";

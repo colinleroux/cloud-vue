@@ -31,8 +31,8 @@ export default {
           device_name: "browser",
         })
         .then((r) => {
-          const token = r.data.token; // Access the token from the response data
-          localStorage.setItem("token", token); // Store the token in localStorage
+          //const token = r.data.token; // Access the token from the response data
+          localStorage.setItem("token", r.data.data.token); // Store the token in localStorage
           //console.log("from login method", JSON.stringify(r.data.token));
           //localStorage.setItem("token", JSON.stringify(r.data));
         });

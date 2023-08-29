@@ -5,11 +5,11 @@ export default function () {
     baseURL: "https://phplaravel-1087149-3834893.cloudwaysapps.com/api",
   });
 
-  let token = localStorage.getItem("token");
-  console.log("Stored Token:", token); // Add this line for debugging
+  const token = localStorage.getStoredToken(); // Call the function to get the parsed token
+  console.log("Stored Token:", token);
   if (token) {
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    console.log("Authorization Header Set with Token:", token); // Add this line for debugging
+    console.log("Authorization Header Set with Token:", token);
   }
   return api;
 }

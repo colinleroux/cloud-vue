@@ -4,8 +4,6 @@
     <input v-model="pass" type="password" />
     <button @click="login">Login</button>
 
-    <div class="">test: <button @click="test">test</button></div>
-    <div class="">user: <button @click="whoami">whoami</button></div>
     <div class=""><button @click="logout">Logout</button></div>
     <div class="">
       {{ message }}
@@ -33,35 +31,18 @@ export default {
           device_name: "browser",
         })
         .then((r) => {
-          console.log(JSON.stringify(r.data.token));
+          console.log("from login method", JSON.stringify(r.data.token));
           localStorage.setItem("token", JSON.stringify(r.data));
         });
     },
     logout: function () {
       // revoke token
       api()
-        .post("logout")
+        .post("v1/logout")
         .then((r) => {
           localStorage.removeItem("token");
-          console.log(r.data);
+          console.log("from logout", r.data);
         });
-    },
-    whoami: function () {
-      // test if backend auth is working
-      api()
-        .get("whoami")
-        .then((response) => console.log((this.message = response.data)))
-        .catch((error) => {
-          if (error.response) this.message = error.response.data.message;
-          throw error;
-        });
-    },
-    test: function () {
-      // this is an unauthenticated route, should always work
-      this.message = "";
-      api()
-        .get("test")
-        .then((response) => console.log((this.message = response.data)));
     },
   },
 };

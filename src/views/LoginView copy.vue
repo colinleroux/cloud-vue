@@ -54,44 +54,38 @@
 </template>
 
 <script>
-import repository from "@/api/repository";
-
+import api from "../api/api.js";
 export default {
-  name: "LoginView",
-  components: {},
-
   data() {
     return {
       user: {
-        email: null,
-        password: null,
+        email: "",
+        password: "",
       },
-      errorMessage: null,
+      errorMessage: "",
     };
   },
-  mounted() {
-    this.user.password = "";
-  },
-
   methods: {
-    async login() {
-      try {
-        const token = await repository.login(this.user);
-        console.log("fuckme", token);
-        localStorage.setItem("token", token); // Store token in local storage
-        this.reloadPage();
-        this.errorMessage = null;
-      } catch (error) {
-        console.error(error);
-        if (error.response && error.response.status === 401) {
-          this.errorMessage = "Email not verified.";
-        } else {
-          this.errorMessage = "Login failed.";
-        }
-      }
-    },
-    reloadPage() {
-      window.location.reload();
+    login() {
+      api()
+        .post("login", {
+          email: this.user.email,
+          password: this.user.password,
+          device_name: "browser",
+        })
+        .then((response) => {
+          const token = response.data.data.token;
+          localStorage.setItem("token", token);
+          this.errorMessage = "";
+          // Redirect or perform other actions after successful login
+        })
+        .catch((error) => {
+          if (error.response && error.response.status === 401) {
+            this.errorMessage = "Email not verified.";
+          } else {
+            this.errorMessage = "Login failed.";
+          }
+        });
     },
   },
 };

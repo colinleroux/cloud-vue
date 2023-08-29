@@ -10,7 +10,7 @@ export default {
   login(params) {
     const email = params.email;
     const password = params.password;
-    return api.post(`${baseUrl}/api/login`, {
+    return api.post(`${baseUrl}/api/auth/login`, {
       email,
       password,
     });
@@ -21,7 +21,7 @@ export default {
     const email = params.email;
     const password = params.password;
     const confirm_password = params.password_confirmation;
-    return api.post(`${baseUrl}/api/register`, {
+    return api.post(`${baseUrl}/api/auth/register`, {
       name,
       email,
       password,

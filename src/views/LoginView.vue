@@ -77,6 +77,7 @@ export default {
     async login() {
       try {
         const token = await repository.login(this.user);
+        console.log("fuckme", token);
         localStorage.setItem("token", token); // Store token in local storage
         this.reloadPage();
         this.errorMessage = null;

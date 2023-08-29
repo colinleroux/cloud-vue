@@ -17,8 +17,8 @@ import api from "../api/api.js";
 export default {
   data() {
     return {
-      user: "test@test.com",
-      pass: "asdf",
+      user: "monique@test.com",
+      pass: "12341234",
       message: "",
     };
   },
@@ -34,7 +34,7 @@ export default {
         })
         .then((r) => {
           console.log(r.data);
-          localStorage.setItem("token", JSON.stringify(r.data.token));
+          localStorage.setItem("token", r.data.token);
         });
     },
     logout: function () {

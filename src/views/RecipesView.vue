@@ -26,7 +26,7 @@
   </style>
   
   <script>
-  import repository from "@/api/repository";
+  import axios from 'axios'; 
   
   export default {
     name: "RecipesView",
@@ -39,11 +39,18 @@
     },
   
     mounted() {
-      repository.getRecipes().then((response) => {
+      const token = localStorage.getItem("token"); // Retrieve token from localStorage
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`; // Set Authorization header
+
+    axios.get("https://phplaravel-1087149-3834893.cloudwaysapps.com/api/v1/recipes")
+      .then(response => {
         console.log(response.data);
         this.data = response.data.data; // Access the 'data' array from the response
+      })
+      .catch(error => {
+        console.error("Error fetching recipes:", error);
       });
-    },
-  };
+  },
+};
   </script>
   

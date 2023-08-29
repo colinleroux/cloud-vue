@@ -8,11 +8,9 @@ export default {
   },
 
   login(params) {
-    const email = params.email;
-    const password = params.password;
-    return api.post(`${baseUrl}/api/login`, {
-      email,
-      password,
+    const { email, password } = params;
+    return api.post("/api/login", { email, password }).then((response) => {
+      return response.data; // Extract data from the response
     });
   },
 

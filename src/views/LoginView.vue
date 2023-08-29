@@ -76,14 +76,16 @@ export default {
   methods: {
     // Login and store token in localStorage
     async login() {
-      // repository.createSession();
       try {
+        await repository.createSession(); // Call the session creation
         const response = await repository.login(this.user);
-        console.log(response.data);
-        repository.setToken(response.data.token);
-        this.reloadPage();
-        //this.$router.push("/recipes");
-        this.errorMessage = null;
+        if (response.token) {
+          repository.setToken(response.token);
+          this.reloadPage();
+          this.errorMessage = null;
+        } else {
+          this.errorMessage = "Token not received in the response";
+        }
       } catch (error) {
         console.error(error);
         if (error.response && error.response.status === 401) {

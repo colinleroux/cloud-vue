@@ -34,7 +34,7 @@ export default {
         })
         .then((r) => {
           console.log(r.data);
-          localStorage.setItem("token", JSON.stringify(r.data));
+          localStorage.setItem("token", JSON.stringify(r.data.token));
         });
     },
     logout: function () {

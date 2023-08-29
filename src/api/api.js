@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default function () {
   let api = axios.create({
-    backendURL: "https://phplaravel-1087149-3834893.cloudwaysapps.com/api",
+    baseURL: "https://phplaravel-1087149-3834893.cloudwaysapps.com/api",
   });
 
   let token = localStorage.getItem("token");

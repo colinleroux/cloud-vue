@@ -47,13 +47,26 @@
     methods: {
       logout() {
         console.log("Logout button clicked");
-        repository.logout(); // Call the logout method from the repository
-        console.log("Logout successful");
-        this.$router.push("/"); // Redirect to the home page or another appropriate route
-      },
+        const token = localStorage.getItem("token"); // Get token from local storage
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`; // Set Authorization header
+      axios.post("https://phplaravel-1087149-3834893.cloudwaysapps.com/api/logout")
+        .then(response => {
+          console.log("Logout successful:", response.data);
+          localStorage.removeItem("token"); // Remove token from localStorage
+          this.$router.push("/"); // Redirect to the home page or another appropriate route
+        })
+        .catch(error => {
+          console.error("Logout failed:", error);
+        });
     },
-  };
-  </script>
+  },
+};
+</script>
+
+Please make sure that the URL in axios.post matches the correct logout API endpoint.
+
+By directly using axios within the component, you're bypassing the repository layer. This setup should work to log the user out and handle the necessary steps. Remember to adapt the code to your specific project structure and needs.
+
   
   <style></style>
   

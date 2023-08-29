@@ -8,6 +8,7 @@ export default function () {
   let token = localStorage.getItem("token");
   if (token) {
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    console.log("Authorization Header Set with Token:", token); // Add this line for debugging
   }
   return api;
 }

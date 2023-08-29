@@ -11,5 +11,6 @@ export default function () {
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     console.log("Authorization Header Set with Token:", token);
   }
+  console.log("FROMAPI", api);
   return api;
 }

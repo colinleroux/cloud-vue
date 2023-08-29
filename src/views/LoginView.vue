@@ -33,7 +33,7 @@ export default {
           device_name: "browser",
         })
         .then((r) => {
-          console.log(r.data);
+          console.log(r.data.token);
           localStorage.setItem("token", JSON.stringify(r.data));
         });
     },

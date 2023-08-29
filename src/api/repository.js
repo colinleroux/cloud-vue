@@ -37,17 +37,6 @@ export default {
   getRecipe(id) {
     return api.get(`${baseUrl}/api/v1/recipes/` + id);
   },
-  setToken(token) {
-    localStorage.setItem("token", token);
-  },
-
-  removeToken() {
-    localStorage.removeItem("token");
-  },
-  getStoredToken() {
-    const storedToken = localStorage.getItem("token");
-    return storedToken ? JSON.parse(storedToken) : null; // Parse the token
-  },
   isAuthenticated() {
     if (localStorage.getItem("token")) {
       return true;

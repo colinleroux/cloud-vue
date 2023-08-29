@@ -14,12 +14,11 @@
 </template>
 <script>
 import api from "../api/api.js";
-import repository from "@/api/repository"; // Import the repository
 export default {
   data() {
     return {
-      user: "monique11@test.com",
-      pass: "12341234",
+      user: "test@test.com",
+      pass: "asdf",
       message: "",
     };
   },
@@ -33,23 +32,18 @@ export default {
           password: this.pass,
           device_name: "browser",
         })
-        .then((response) => {
-          const token = response.data.token;
-          console.log("Token from Response:", token);
-          repository.setToken(token); // Store token using the updated method
-          console.log(
-            "Token Stored in Local Storage:",
-            repository.getStoredToken()
-          );
+        .then((r) => {
+          console.log(r.data);
+          localStorage.setItem("token", r.data);
         });
     },
     logout: function () {
       // revoke token
       api()
         .post("logout")
-        .then((response) => {
+        .then((r) => {
           localStorage.removeItem("token");
-          console.log(response.data);
+          console.log(r.data);
         });
     },
     whoami: function () {

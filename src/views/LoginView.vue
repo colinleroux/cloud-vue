@@ -74,26 +74,18 @@ export default {
   },
 
   methods: {
-    // Login and store token in localStorage
     async login() {
       try {
-        await repository.createSession(); // Call the session creation
-        const response = await repository.login(this.user);
-        if (response.token) {
-          repository.setToken(response.token);
-          this.reloadPage();
-          this.errorMessage = null;
-        } else {
-          this.errorMessage = "Token not received in the response";
-        }
+        const token = await repository.login(this.user);
+        localStorage.setItem("token", token); // Store token in local storage
+        this.reloadPage();
+        this.errorMessage = null;
       } catch (error) {
         console.error(error);
         if (error.response && error.response.status === 401) {
-          this.errorMessage =
-            "Email not verified. Please check your email for verification instructions.";
+          this.errorMessage = "Email not verified.";
         } else {
-          this.errorMessage =
-            "Login failed. Please check your email and password.";
+          this.errorMessage = "Login failed.";
         }
       }
     },

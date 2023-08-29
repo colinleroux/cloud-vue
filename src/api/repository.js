@@ -3,17 +3,11 @@ import api from "./api";
 const baseUrl = "https://phplaravel-1087149-3834893.cloudwaysapps.com";
 
 export default {
-  createSession() {
-    return api.get(`${baseUrl}/sanctum/csrf-cookie`);
-  },
-
-  async login(params) {
+  login(params) {
     const { email, password } = params;
-    const response = await api.post(`${baseUrl}/api/login`, {
-      email,
-      password,
-    });
-    return response.data;
+    return api
+      .post("/login", { email, password })
+      .then((response) => response.data.token); // Extract token from the response
   },
 
   register(params) {

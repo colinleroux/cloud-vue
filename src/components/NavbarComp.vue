@@ -49,7 +49,7 @@
         console.log("Logout button clicked");
         const token = localStorage.getItem("token"); // Get token from local storage
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`; // Set Authorization header
-      axios.post("https://phplaravel-1087149-3834893.cloudwaysapps.com/api/logout")
+      axios.post("https://phplaravel-1087149-3834893.cloudwaysapps.com/api/v1/logout")
         .then(response => {
           console.log("Logout successful:", response.data);
           localStorage.removeItem("token"); // Remove token from localStorage

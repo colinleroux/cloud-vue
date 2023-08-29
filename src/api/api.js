@@ -1,20 +1,13 @@
 import axios from "axios";
 
-let instance = axios.create({
-  withCredentials: true,
-});
+export default function () {
+  let api = axios.create({
+    baseURL: "https://phplaravel-1087149-3834893.cloudwaysapps.com/api",
+  });
 
-instance.interceptors.request.use((request) => {
-  request.headers["Content-Type"] = "application/json";
-  request.headers.common["Content-Type"] = "application/json";
-
-  const token = localStorage.getItem("token");
-  console.log("Token from Local Storage:", token); // Add this line
+  let token = localStorage.getItem("token");
   if (token) {
-    request.headers.common["Authorization"] = `Bearer ${token}`;
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   }
-
-  return request;
-});
-
-export default instance;
+  return api;
+}

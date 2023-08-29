@@ -76,7 +76,7 @@ export default {
   methods: {
     // Login and store token in localStorage
     async login() {
-      repository.createSession();
+      // repository.createSession();
       try {
         const response = await repository.login(this.user);
         console.log(response);

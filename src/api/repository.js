@@ -5,11 +5,9 @@ const baseUrl = "https://phplaravel-1087149-3834893.cloudwaysapps.com";
 export default {
   login(params) {
     const { email, password } = params;
-    return api.post("/login", { email, password }).then((response) => {
-      const token = response.data.token;
-      console.log("Extracted Token:", token);
-      return token;
-    });
+    return api
+      .post("/login", { email, password })
+      .then((response) => response.data.token); // Extract token from the response
   },
 
   register(params) {
@@ -35,7 +33,7 @@ export default {
     return api.get(`${baseUrl}/api/v1/recipes/` + id);
   },
   setToken(token) {
-    localStorage.setItem("token", JSON.stringify(token));
+    localStorage.setItem("token", token);
   },
 
   removeToken() {

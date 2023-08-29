@@ -1,7 +1,13 @@
 import axios from "axios";
 
-const instance = axios.create({
-  baseURL: "https://phplaravel-1087149-3834893.cloudwaysapps.com/api",
-});
+export default function () {
+  let api = axios.create({
+    baseURL: "https://phplaravel-1087149-3834893.cloudwaysapps.com/api",
+  });
 
-export default instance;
+  let token = localStorage.getItem("token");
+  if (token) {
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  }
+  return api;
+}

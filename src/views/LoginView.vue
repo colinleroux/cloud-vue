@@ -1,98 +1,69 @@
 <template>
-  <div>
-    <h1 class="text-3xl font-bold mt-5 mb-5 text-center">Login Page</h1>
+  <div class="">
+    <input v-model="user" type="text" />
+    <input v-model="pass" type="password" />
+    <button @click="login">Login</button>
 
-    <div class="flex justify-center">
-      <div class="w-full max-w-sm m-5">
-        <div class="bg-white rounded-xl shadow-lg p-6 h-full">
-          <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full px-3 py-2">
-              <label
-                class="block text-gray-700 text-sm font-bold mb-2"
-                for="title"
-              >
-                Email
-              </label>
-              <input
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="email"
-                type="email"
-                v-model="user.email"
-              />
-            </div>
-
-            <div class="w-full px-3 py-2">
-              <label
-                class="block text-gray-700 text-sm font-bold mb-2"
-                for="title"
-              >
-                Password
-              </label>
-              <input
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="password"
-                type="password"
-                v-model="user.password"
-                @keyup.enter="login"
-              />
-            </div>
-
-            <div class="w-full px-3 py-2">
-              <button
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                @click="login"
-              >
-                Login
-              </button>
-              <p class="text-red-500">{{ errorMessage }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="">test: <button @click="test">test</button></div>
+    <div class="">user: <button @click="whoami">whoami</button></div>
+    <div class=""><button @click="logout">Logout</button></div>
+    <div class="">
+      {{ message }}
     </div>
   </div>
 </template>
-
 <script>
-import repository from "@/api/repository";
-
+import api from "../api/api.js";
 export default {
-  name: "LoginView",
-  components: {},
-
   data() {
     return {
-      user: {
-        email: null,
-        password: null,
-      },
-      errorMessage: null,
+      user: "test@test.com",
+      pass: "asdf",
+      message: "",
     };
   },
-  mounted() {
-    this.user.password = "";
-  },
-
+  mounted: function () {},
   methods: {
-    async login() {
-      try {
-        const token = await repository.login(this.user);
-        console.log("fuckme", token);
-        localStorage.setItem("token", token); // Store token in local storage
-        this.reloadPage();
-        this.errorMessage = null;
-      } catch (error) {
-        console.error(error);
-        if (error.response && error.response.status === 401) {
-          this.errorMessage = "Email not verified.";
-        } else {
-          this.errorMessage = "Login failed.";
-        }
-      }
+    login: function () {
+      // get token
+      api()
+        .post("login", {
+          email: this.user,
+          password: this.pass,
+          device_name: "browser",
+        })
+        .then((r) => {
+          console.log(r.data);
+          localStorage.setItem("token", r.data);
+        });
     },
-    reloadPage() {
-      window.location.reload();
+    logout: function () {
+      // revoke token
+      api()
+        .post("logout")
+        .then((r) => {
+          localStorage.removeItem("token");
+          console.log(r.data);
+        });
+    },
+    whoami: function () {
+      // test if backend auth is working
+      api()
+        .get("whoami")
+        .then((response) => console.log((this.message = response.data)))
+        .catch((error) => {
+          if (error.response) this.message = error.response.data.message;
+          throw error;
+        });
+    },
+    test: function () {
+      // this is an unauthenticated route, should always work
+      this.message = "";
+      api()
+        .get("test")
+        .then((response) => console.log((this.message = response.data)));
     },
   },
 };
 </script>
+<style></style>

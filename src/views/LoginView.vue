@@ -37,11 +37,19 @@ export default {
     },
     logout: function () {
       // revoke token
+      const token = localStorage.getItem("token");
       api()
-        .post("v1/logout")
+        .post(
+          "v1/logout",
+          {},
+          { headers: { Authorization: `Bearer ${token}` } }
+        )
         .then((r) => {
           localStorage.removeItem("token");
           console.log("from logout", r.data);
+        })
+        .catch((error) => {
+          console.error("Logout Error:", error);
         });
     },
   },

@@ -35,7 +35,7 @@ export default {
     return api.get(`${baseUrl}/api/v1/recipes/` + id);
   },
   setToken(token) {
-    localStorage.setItem("token", token);
+    localStorage.setItem("token", JSON.stringify(token));
   },
 
   removeToken() {

@@ -33,8 +33,15 @@ export default {
           device_name: "browser",
         })
         .then((response) => {
-          console.log(response.data);
-          localStorage.setItem("token", response.data.token.toString());
+          const token = response.data.token;
+          console.log("Token from Response:", token);
+          // eslint-disable-next-line no-undef
+          repository.setToken(token); // Store token using the updated method
+          console.log(
+            "Token Stored in Local Storage:",
+            // eslint-disable-next-line no-undef
+            repository.getStoredToken()
+          );
         });
     },
     logout: function () {

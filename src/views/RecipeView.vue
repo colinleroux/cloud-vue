@@ -3,17 +3,11 @@
       class="bg-white rounded-lg overflow-hidden shadow-lg max-w-md mx-auto my-8"
     >
       <div class="p-4">
-        <h1 class="text-lg font-semibold">{{ product.name }}</h1>
-        <p class="text-gray-700 text-sm">desc{{ product.description }}</p>
-        <p class="text-lg font-semibold text-gray-900">${{ product.price }}</p>
-        <ul>
-          <p class="text-md font-semibold text-gray-900">Categories</p>
-          <li v-for="category in product.categories" :key="category.id">
-            {{ category.attributes.name }}
-          </li>
-        </ul>
+        <h1 class="text-lg font-semibold">{{ recipe.name }}</h1>
+        <p class="text-gray-700 text-sm">desc{{ recipe.description }}</p>
+                
         <br />
-        <router-link :to="'/products'">Back</router-link>
+        <router-link :to="'/recipes'">Back</router-link>
       </div>
     </div>
   </template>
@@ -35,7 +29,7 @@
   import { data } from "autoprefixer";
   
   export default {
-    name: "ProductView",
+    name: "RecipeView",
     computed: {
       data() {
         return data;
@@ -43,18 +37,18 @@
     },
     data() {
       return {
-        product: {},
+        recipe: {},
       };
     },
   
     mounted() {
-      this.getProduct();
+      this.getRecipe();
     },
     methods: {
       getProduct() {
-        repository.getProduct(this.$route.params.id).then((response) => {
+        repository.getRecipe(this.$route.params.id).then((response) => {
           console.log(response.data);
-          this.product = response.data.data;
+          this.recipe = response.data.data;
         });
       },
     },

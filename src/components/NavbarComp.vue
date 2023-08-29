@@ -46,13 +46,8 @@ export default {
 
   methods: {
     logout() {
-      repository.logout();
-      repository.removeToken();
-      this.reloadPage();
-      this.$router.push("/");
-    },
-    reloadPage() {
-      window.location.reload();
+      repository.logout(); // Call the logout method from the repository
+      this.$router.push("/"); // Redirect to the home page or another appropriate route
     },
   },
 };

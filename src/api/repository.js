@@ -7,6 +7,7 @@ export default {
     const { email, password } = params;
     return api.post("/login", { email, password }).then((response) => {
       const token = response.data.token;
+      console.log("Login Response:", response.data);
       api.defaults.headers.common["Authorization"] = `Bearer ${token}`; // Set token in headers
       return token;
     });
@@ -26,8 +27,8 @@ export default {
   },
 
   logout() {
-    console.log("FROM API", api);
-    return api.post(`${baseUrl}/api/logout`).then(() => {
+    return api.post(`${baseUrl}/api/logout`).then((response) => {
+      console.log("Logout Response:", response.data);
       api.defaults.headers.common["Authorization"] = null; // Remove token from headers
       localStorage.removeItem("token"); // Remove token from localStorage
     });

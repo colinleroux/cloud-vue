@@ -7,13 +7,13 @@ export default {
     return api.get(`${baseUrl}/sanctum/csrf-cookie`);
   },
 
-  login(params) {
+  async login(params) {
     const { email, password } = params;
-    return api
-      .post(`${baseUrl}/api/login`, { email, password })
-      .then((response) => {
-        return response.data; // Extract data from the response
-      });
+    const response = await api.post(`${baseUrl}/api/login`, {
+      email,
+      password,
+    });
+    return response.data;
   },
 
   register(params) {

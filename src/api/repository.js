@@ -27,7 +27,7 @@ export default {
   },
 
   logout() {
-    return api.post(`${baseUrl}/api/logout`).then((response) => {
+    return api.post(`${baseUrl}/api/v1/logout`).then((response) => {
       console.log("Logout Response:", response.data);
       api.defaults.headers.common["Authorization"] = null; // Remove token from headers
       localStorage.removeItem("token"); // Remove token from localStorage

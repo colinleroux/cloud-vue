@@ -46,7 +46,9 @@ export default {
 
   methods: {
     logout() {
+      console.log("Logout button clicked");
       repository.logout(); // Call the logout method from the repository
+      console.log("Logout successful");
       this.$router.push("/"); // Redirect to the home page or another appropriate route
     },
   },

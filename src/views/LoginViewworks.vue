@@ -54,8 +54,12 @@
 </template>
 
 <script>
-import api from "../api/api.js";
+import repository from "@/api/repository";
+
 export default {
+  name: "LoginView",
+  components: {},
+
   data() {
     return {
       user: {
@@ -65,19 +69,16 @@ export default {
       errorMessage: null,
     };
   },
-  mounted: function () {
+  mounted() {
     this.user.password = "";
   },
+
   methods: {
     async login() {
       try {
-        const response = await api().post("login", {
-          email: this.user.email,
-          password: this.user.password,
-          device_name: "browser",
-        });
-        console.log(response.data);
-        localStorage.setItem("token", response.data.token); // Store token in local storage
+        const token = await repository.login(this.user);
+        console.log("fuckme", token);
+        localStorage.setItem("token", token); // Store token in local storage
         this.reloadPage();
         this.errorMessage = null;
       } catch (error) {
@@ -95,5 +96,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

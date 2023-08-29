@@ -76,7 +76,7 @@ export default {
           password: this.user.password,
           device_name: "browser",
         });
-        console.log(r.data);
+        console.log(r.data.token);
         localStorage.setItem("token", r.data.token); // Store token in local storage
         this.reloadPage();
         this.errorMessage = null;

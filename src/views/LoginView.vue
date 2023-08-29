@@ -79,7 +79,7 @@ export default {
       // repository.createSession();
       try {
         const response = await repository.login(this.user);
-        console.log(response);
+        console.log(response.data);
         repository.setToken(response.data.token);
         this.reloadPage();
         //this.$router.push("/recipes");

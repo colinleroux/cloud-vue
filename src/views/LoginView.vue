@@ -32,18 +32,18 @@ export default {
           password: this.pass,
           device_name: "browser",
         })
-        .then((r) => {
-          console.log(r.data);
-          localStorage.setItem("token", r.data);
+        .then((response) => {
+          console.log(response.data);
+          localStorage.setItem("token", response.data.token.toString());
         });
     },
     logout: function () {
       // revoke token
       api()
         .post("logout")
-        .then((r) => {
+        .then((response) => {
           localStorage.removeItem("token");
-          console.log(r.data);
+          console.log(response.data);
         });
     },
     whoami: function () {
